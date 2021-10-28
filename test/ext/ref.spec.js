@@ -1,6 +1,6 @@
 import { _refs, _ref } from "../../src/ext/ref.js"
 import { define } from "../../src/define.js"
-import { whenDefined } from "../../src/whenDefined.js"
+import { whenConnected } from "../../src/whenConnected.js"
 import { fixture, createElement } from "../utils.js"
 const { module, test } = QUnit
 
@@ -21,7 +21,7 @@ module("ref", () => {
       })
 
       const done = assert.async()
-      whenDefined(element).then(done)
+      whenConnected(element).then(done)
     })
 
     test("don't get nested refs", (assert) => {
@@ -52,7 +52,7 @@ module("ref", () => {
       })
 
       const done = assert.async()
-      Promise.all([whenDefined(element), whenDefined(nested)]).then(done)
+      Promise.all([whenConnected(element), whenConnected(nested)]).then(done)
     })
   })
 

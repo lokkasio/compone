@@ -1,3 +1,3 @@
 export { define } from "./define.js"
-export { whenDefined } from "./whenDefined.js"
+export { whenConnected } from "./whenConnected.js"
 export { ext } from "./extend.js"
