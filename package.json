@@ -1,9 +1,7 @@
 {
   "name": "compone",
   "version": "0.0.0",
-  "description": "",
-  "author": "Lukas Mestel",
-  "license": "Unlicense",
+  "description": "Ⓒ❶",
   "keywords": [
     "composable",
     "functional",
@@ -12,12 +10,14 @@
     "framework"
   ],
   "repository": "lokkasio/compone",
+  "license": "Unlicense",
+  "author": "Lukas Mestel",
   "type": "module",
   "exports": {
     ".": "./src/index.js",
     "./*": "./src/*.js",
-    "./ext": "./src/ext/index.js",
-    "./ext/*": "./src/ext/*.js",
+    "./extensions": "./src/extensions/index.js",
+    "./extensions/*": "./src/extensions/*.js",
     "./package.json": "./package.json"
   },
   "types": "./src/index.d.ts",
@@ -32,23 +32,22 @@
   "files": [
     "src"
   ],
-  "sideEffects": false,
   "scripts": {
     "format": "prettier --write .",
     "husky:precommit": "prettier --list-different --write . | xargs git add && CI=true npm t",
-    "prepublishOnly": "npm run types",
     "prepare": "husky install",
+    "prepublishOnly": "npm run types",
     "test": "karma start karma.conf.cjs",
     "types": "del-cli 'src/**/*.d.ts' && tsc src/*.js src/**/*.js --allowJs --declaration --emitDeclarationOnly"
   },
   "devDependencies": {
     "del-cli": "^4.0.1",
     "husky": "^7.0.4",
-    "karma": "^6.3.5",
-    "karma-firefox-launcher": "^2.1.1",
+    "karma": "^6.3.9",
+    "karma-firefox-launcher": "^2.1.2",
     "karma-qunit": "^4.1.2",
-    "prettier": "^2.4.1",
+    "prettier": "^2.5.1",
     "qunit": "^2.17.2",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.2"
   }
 }

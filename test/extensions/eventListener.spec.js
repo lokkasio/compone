@@ -1,5 +1,5 @@
-import { _on } from "../../src/ext/eventListener.js"
-import { ON_DISCONNECT_PROPERTY } from "../../src/const.js"
+import { _on } from "../../src/extensions/eventListener.js"
+import { C1_PROPERTY, ON_DISCONNECT_PROPERTY } from "../../src/const.js"
 import { connect } from "../../src/core.js"
 import { createElement } from "../utils.js"
 const { module, test } = QUnit
@@ -48,10 +48,11 @@ module(
 
       connect(button, (host) => {
         const on = _on(host)
-        const disconnectedCallbacks = host[ON_DISCONNECT_PROPERTY].length
+        const disconnectedCallbacks =
+          host[C1_PROPERTY][ON_DISCONNECT_PROPERTY].length
         on(host, "click", () => {})
         assert.equal(
-          host[ON_DISCONNECT_PROPERTY].length,
+          host[C1_PROPERTY][ON_DISCONNECT_PROPERTY].length,
           disconnectedCallbacks + 1
         )
         done()

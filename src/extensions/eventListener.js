@@ -1,10 +1,10 @@
 import { _onDisconnect } from "./onDisconnect.js"
 
-/** @param { HTMLElement } host */
+/** @param { Element } host */
 export const _on = (host) => {
   const onDisconnect = _onDisconnect(host)
   /**
-   * @param { HTMLElement } element
+   * @param { Element } element
    * @param { string } type
    * @param { EventListener } listener
    * @param { boolean | AddEventListenerOptions } [options]

@@ -1,7 +1,7 @@
-import { _on } from "../../src/ext/eventListener.js"
-import { _onDisconnect } from "../../src/ext/onDisconnect.js"
-import { ON_DISCONNECT_PROPERTY } from "../../src/const.js"
+import { _on } from "../../src/extensions/eventListener.js"
+import { _onDisconnect } from "../../src/extensions/onDisconnect.js"
 import { connect, disconnect } from "../../src/core.js"
+import { C1_PROPERTY, ON_DISCONNECT_PROPERTY } from "../../src/const.js"
 import { createElement } from "../utils.js"
 const { module, test } = QUnit
 
@@ -20,10 +20,11 @@ module(
 
       connect(element, (host) => {
         const onDisconnect = _onDisconnect(host)
-        const disconnectedCallbacks = host[ON_DISCONNECT_PROPERTY].length
+        const disconnectedCallbacks =
+          host[C1_PROPERTY][ON_DISCONNECT_PROPERTY].length
         onDisconnect(() => {})
         assert.equal(
-          host[ON_DISCONNECT_PROPERTY].length,
+          host[C1_PROPERTY][ON_DISCONNECT_PROPERTY].length,
           disconnectedCallbacks + 1
         )
         done()

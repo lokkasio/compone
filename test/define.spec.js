@@ -1,14 +1,17 @@
-import { _onDisconnect } from "../src/ext/onDisconnect.js"
+import { _onDisconnect } from "../src/extensions/onDisconnect.js"
 import { define } from "../src/define.js"
+import { whenConnected } from "../src/whenConnected.js"
 import { fixture, createElement } from "./utils.js"
 const { module, test } = QUnit
 
 module("define", () => {
   test("connect present element", (assert) => {
+    const done = assert.async()
     const element = createElement("div", { c1: "define-1" })
     fixture().appendChild(element)
     define("define-1", () => {
       assert.ok(true)
+      done()
     })
   })
 
@@ -46,7 +49,7 @@ module("define", () => {
         done()
       })
     })
-    setTimeout(() => {
+    whenConnected(element).then(() => {
       fixture().removeChild(element)
     })
   })
@@ -62,7 +65,7 @@ module("define", () => {
         done()
       })
     })
-    setTimeout(() => {
+    whenConnected(element).then(() => {
       element.removeAttribute("c1")
     })
   })
@@ -81,7 +84,7 @@ module("define", () => {
       assert.ok(true)
       done()
     })
-    setTimeout(() => {
+    whenConnected(element).then(() => {
       element.setAttribute("c1", "define-7")
     })
   })
@@ -111,7 +114,7 @@ module("define", () => {
         done()
       })
     })
-    setTimeout(() => {
+    whenConnected(element).then(() => {
       fixture().removeChild(parent)
     })
   })

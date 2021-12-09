@@ -4,10 +4,10 @@
  * @param { ((ctx: C) => R)[] } fns
  * @returns
  */
-export const ext =
+export const extend =
   (...fns) =>
-  /** @param { (ctx: C, ...args: R[]) => unknown } target */
-  (target) =>
+  /** @param { (ctx: C, ...args: R[]) => unknown } callback */
+  (callback) =>
   /** @param { C } ctx */
-  (ctx) =>
-    target(ctx, ...fns.map((fn) => fn(ctx)))
+  (ctx, ...rest) =>
+    callback(ctx, ...fns.map((fn) => fn(ctx)), ...rest)

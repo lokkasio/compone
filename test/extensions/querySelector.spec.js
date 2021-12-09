@@ -1,4 +1,4 @@
-import { _qs, _qsa } from "../../src/ext/querySelector.js"
+import { _qs, _qsa } from "../../src/extensions/querySelector.js"
 import { fixture, createElement } from "../utils.js"
 const { module, test } = QUnit
 

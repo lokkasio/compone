@@ -1,8 +1,8 @@
 import { ATTRIBUTE } from "./const.js"
 
-/** @typedef { (element: HTMLElement) => void } lifecycleCallback */
+/** @typedef { (element: Element) => void } lifecycleCallback */
 
-/** @param { HTMLElement } node */
+/** @param { ParentNode } node */
 const qSA = (node) => node.querySelectorAll(`[${ATTRIBUTE}]`)
 
 /**
@@ -12,7 +12,8 @@ const qSA = (node) => node.querySelectorAll(`[${ATTRIBUTE}]`)
 const process = (nodes, callback) => {
   for (const entryNode of nodes) {
     if (entryNode.nodeType === Node.ELEMENT_NODE) {
-      ;[entryNode, ...qSA(entryNode)].forEach(callback)
+      const element = /** @type Element */ (entryNode)
+      ;[element, ...qSA(element)].forEach(callback)
     }
   }
 }
@@ -29,8 +30,9 @@ export const observe = (
   new MutationObserver((records) => {
     for (const { attributeName, target, removedNodes, addedNodes } of records) {
       if (attributeName) {
-        disconnectedCallback(target)
-        connectedCallback(target)
+        const element = /** @type Element */ (target)
+        disconnectedCallback(element)
+        connectedCallback(element)
       }
 
       process(removedNodes, disconnectedCallback)

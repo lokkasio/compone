@@ -1,21 +1,21 @@
-import { API_PROPERTY, ON_DISCONNECT_PROPERTY } from "./const.js"
+import { C1_PROPERTY, ON_DISCONNECT_PROPERTY } from "./const.js"
 
 /**
- * @param { HTMLElement } element
- * @param { (element: HTMLElement) => unknown } connectedCb
- * @param { string | symbol } [apiProp]
+ * @template { unknown } API public api
+ * @param { Element } element
+ * @param { (element: Element) => API } connectedCb
+ * @returns { Promise<API> }
  */
-export const connect = (element, connectedCb, apiProp = API_PROPERTY) => {
-  element[ON_DISCONNECT_PROPERTY] ??= []
-  element[apiProp] ??= Promise.resolve(connectedCb(element))
-}
+export const connect = (element, connectedCb) =>
+  (element[C1_PROPERTY] ??= Object.assign(
+    new Promise((resolve) => setTimeout(() => resolve(connectedCb(element)))),
+    connectedCb
+  ))
 
-/**
- * @param { HTMLElement } element
- * @param { string | symbol } [apiProp]
- */
-export const disconnect = (element, apiProp = API_PROPERTY) => {
-  element[ON_DISCONNECT_PROPERTY]?.forEach((disconnectedCb) => disconnectedCb())
-  delete element[ON_DISCONNECT_PROPERTY]
-  delete element[apiProp]
+/** @param { Element } element */
+export const disconnect = (element) => {
+  element[C1_PROPERTY]?.[ON_DISCONNECT_PROPERTY]?.forEach((disconnectedCb) =>
+    disconnectedCb()
+  )
+  delete element[C1_PROPERTY]
 }

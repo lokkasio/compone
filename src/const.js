@@ -1,3 +1,5 @@
 export const ATTRIBUTE = "c1"
-export const API_PROPERTY = Symbol("c1")
-export const ON_DISCONNECT_PROPERTY = Symbol("c1d")
+export const C1_PROPERTY = ATTRIBUTE
+export const IDENTIFIER_PROPERTY = "identifier"
+export const SELECTOR_PROPERTY = "selector"
+export const ON_DISCONNECT_PROPERTY = "_onDisconnect"

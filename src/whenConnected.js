@@ -1,20 +1,19 @@
-import { API_PROPERTY } from "./const.js"
+import { C1_PROPERTY } from "./const.js"
 
 /**
- * @param {Element} element
- * @param { string | symbol } [apiProp]
+ * @param { Element } element
  * @returns { Promise<unknown> }
  */
-export const whenConnected = (element, apiProp = API_PROPERTY) => {
+export const whenConnected = (element) => {
   const defineProperty = (descriptor) =>
     Object.defineProperty(
       element,
-      apiProp,
+      C1_PROPERTY,
       Object.assign({ configurable: true }, descriptor)
     )
   return new Promise((resolve) => {
-    if (element[apiProp]) {
-      resolve(element[apiProp])
+    if (element[C1_PROPERTY]) {
+      resolve(element[C1_PROPERTY])
     } else {
       defineProperty({
         set(value) {
