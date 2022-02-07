@@ -72,34 +72,3 @@ define("my-compone", function (host) {
   const children = qsa(".child")
 })
 ```
-
-### `extend`
-
-Using extensions can be verbose
-
-```js
-const onDisconnect = _onDisconnect(host)
-const on = _on(host)
-const qs = _qs(host)
-const qsa = _qsa(host)
-```
-
-Fortunately there is a handy helper, that reduces the boilerplate
-
-```js
-import { define, extend } from "compone"
-import { _on, _qs } from "compone/mixins"
-
-define(
-  "my-compone",
-  extend(
-    _on,
-    _qs
-  )(function (host, on, qs) {
-    const button = qs(".button")
-    on(button, "click", function (event) {
-      console.log("button click", event)
-    })
-  })
-)
-```
