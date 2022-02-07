@@ -1,4 +1,4 @@
-import { _refs } from "../../src/extensions/ref.js"
+import { _refs } from "../../src/mixins/ref.js"
 import { define } from "../../src/define.js"
 import { whenConnected } from "../../src/whenConnected.js"
 import { fixture, createElement } from "../utils.js"

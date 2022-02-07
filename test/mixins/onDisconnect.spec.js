@@ -1,5 +1,5 @@
-import { _on } from "../../src/extensions/eventListener.js"
-import { _onDisconnect } from "../../src/extensions/onDisconnect.js"
+import { _on } from "../../src/mixins/eventListener.js"
+import { _onDisconnect } from "../../src/mixins/onDisconnect.js"
 import { connect, disconnect } from "../../src/core.js"
 import { C1_PROPERTY, ON_DISCONNECT_PROPERTY } from "../../src/const.js"
 import { createElement } from "../utils.js"

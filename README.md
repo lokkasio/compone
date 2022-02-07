@@ -14,15 +14,15 @@ define("my-compone", function (host) {
 })
 ```
 
-## Extensions
+## Mixins
 
-Add more functionality to your compone with extensions
+Add more functionality to your compone with mixins
 
 ### `onDisconnect`
 
 ```js
 import { define } from "compone"
-import { _onDisconnect } from "compone/extensions"
+import { _onDisconnect } from "compone/mixins"
 
 define("my-compone", function (host) {
   const onDisconnect = _onDisconnect(host)
@@ -41,11 +41,11 @@ define("my-compone", function (host) {
 
 ### `on`
 
-`onDisconnect` is a good place to clean up event listeners. While this is a common pattern, there's an own extension for that.
+`onDisconnect` is a good place to clean up event listeners. While this is a common pattern, there's an own mixin for that.
 
 ```js
 import { define } from "compone"
-import { _on } from "compone/extensions"
+import { _on } from "compone/mixins"
 
 define("my-compone", function (host) {
   const on = _on(host)
@@ -62,7 +62,7 @@ Another common task is selecting child elements
 
 ```js
 import { define } from "compone"
-import { _qs, _qsa } from "compone/extensions"
+import { _qs, _qsa } from "compone/mixins"
 
 define("my-compone", function (host) {
   const qs = _qs(host)
@@ -88,7 +88,7 @@ Fortunately there is a handy helper, that reduces the boilerplate
 
 ```js
 import { define, extend } from "compone"
-import { _on, _qs } from "compone/extensions"
+import { _on, _qs } from "compone/mixins"
 
 define(
   "my-compone",

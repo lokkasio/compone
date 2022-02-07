@@ -1,4 +1,4 @@
-import { _on } from "../../src/extensions/eventListener.js"
+import { _on } from "../../src/mixins/eventListener.js"
 import { C1_PROPERTY, ON_DISCONNECT_PROPERTY } from "../../src/const.js"
 import { connect } from "../../src/core.js"
 import { createElement } from "../utils.js"

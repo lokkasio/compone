@@ -19,3 +19,11 @@ export const _refs = (host) => {
       (ref) => ref.closest(host[C1_PROPERTY][SELECTOR_PROPERTY]) === host
     )
 }
+
+/** @param { Element } host */
+export const _ref = (host) => {
+  const refs = _refs(host)
+
+  /** @param { string } name */
+  return (name, root = host) => refs(name, root)[0]
+}
