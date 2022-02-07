@@ -1,4 +1,4 @@
-import { ATTRIBUTE, IDENTIFIER_PROPERTY, SELECTOR_PROPERTY } from "./const.js"
+import { ATTRIBUTE } from "./const.js"
 import { connect, disconnect } from "./core.js"
 import { observe } from "./observer.js"
 
@@ -13,7 +13,7 @@ const mount = (element) => {
   const identifier = toLowerCase(element.getAttribute(ATTRIBUTE))
   if (identifier) {
     if (registry[identifier]) {
-      connect(element, registry[identifier])
+      connect(element, registry[identifier], identifier, `[c1=${identifier}]`)
     } else {
       if (!deferred[identifier]) {
         deferred[identifier] = []
@@ -30,10 +30,7 @@ const mount = (element) => {
 export const define = (identifier, connectedCb) => {
   identifier = toLowerCase(identifier)
   if (identifier && !registry[identifier]) {
-    registry[identifier] = Object.assign(connectedCb, {
-      [IDENTIFIER_PROPERTY]: identifier,
-      [SELECTOR_PROPERTY]: `[c1=${identifier}]`,
-    })
+    registry[identifier] = connectedCb
     if (deferred[identifier]) {
       deferred[identifier].forEach(mount)
       delete deferred[identifier]
