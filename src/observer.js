@@ -28,21 +28,13 @@ export const observe = (
   root = document
 ) => {
   new MutationObserver((records) => {
-    for (const { attributeName, target, removedNodes, addedNodes } of records) {
-      if (attributeName) {
-        const element = /** @type Element */ (target)
-        disconnectedCallback(element)
-        connectedCallback(element)
-      }
-
+    for (const { removedNodes, addedNodes } of records) {
       process(removedNodes, disconnectedCallback)
       process(addedNodes, connectedCallback)
     }
   }).observe(root, {
     childList: true,
     subtree: true,
-    attributes: true,
-    attributeFilter: [ATTRIBUTE],
   })
 
   qSA(root).forEach(connectedCallback)

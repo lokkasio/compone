@@ -1,4 +1,4 @@
-import { _onDisconnect } from "../src/extensions/onDisconnect.js"
+import { _onDisconnect } from "../src/mixins/onDisconnect.js"
 import { define } from "../src/define.js"
 import { whenConnected } from "../src/whenConnected.js"
 import { fixture, createElement } from "./utils.js"
@@ -25,19 +25,6 @@ module("define", () => {
     fixture().appendChild(element)
   })
 
-  test("connect present element with future attribute", (assert) => {
-    const done = assert.async()
-    const element = createElement("div")
-    fixture().appendChild(element)
-    define("define-3", () => {
-      assert.ok(true)
-      done()
-    })
-    setTimeout(() => {
-      element.setAttribute("c1", "define-3")
-    })
-  })
-
   test("disconnect when element is removed", (assert) => {
     const done = assert.async()
     const element = createElement("div", { c1: "define-4" })
@@ -51,41 +38,6 @@ module("define", () => {
     })
     whenConnected(element).then(() => {
       fixture().removeChild(element)
-    })
-  })
-
-  test("disconnect when attribute is removed", (assert) => {
-    const done = assert.async()
-    const element = createElement("div", { c1: "define-5" })
-    fixture().appendChild(element)
-    define("define-5", (host) => {
-      const onDisconnect = _onDisconnect(host)
-      onDisconnect(() => {
-        assert.ok(true)
-        done()
-      })
-    })
-    whenConnected(element).then(() => {
-      element.removeAttribute("c1")
-    })
-  })
-
-  test("reconnect when attribute is changed", (assert) => {
-    const done = assert.async()
-    const element = createElement("div", { c1: "define-6" })
-    fixture().appendChild(element)
-    define("define-6", (host) => {
-      const onDisconnect = _onDisconnect(host)
-      onDisconnect(() => {
-        assert.ok(true)
-      })
-    })
-    define("define-7", () => {
-      assert.ok(true)
-      done()
-    })
-    whenConnected(element).then(() => {
-      element.setAttribute("c1", "define-7")
     })
   })
 
