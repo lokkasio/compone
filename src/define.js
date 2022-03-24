@@ -13,7 +13,7 @@ const mount = (element) => {
   const identifier = toLowerCase(element.getAttribute(ATTRIBUTE))
   if (identifier) {
     if (registry[identifier]) {
-      connect(element, registry[identifier], identifier, `[c1=${identifier}]`)
+      connect(element, registry[identifier], identifier)
     } else {
       if (!deferred[identifier]) {
         deferred[identifier] = []
@@ -24,8 +24,9 @@ const mount = (element) => {
 }
 
 /**
+ * @template API public api
  * @param { string } identifier
- * @param { (host: Element) => unknown } connectedCb
+ * @param { (host: Element) => API } connectedCb
  */
 export const define = (identifier, connectedCb) => {
   identifier = toLowerCase(identifier)

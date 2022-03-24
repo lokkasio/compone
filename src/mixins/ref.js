@@ -1,24 +1,13 @@
-import {
-  ATTRIBUTE,
-  C1_PROPERTY,
-  IDENTIFIER_PROPERTY,
-  SELECTOR_PROPERTY,
-} from "../const.js"
-import { _qsa } from "./querySelector.js"
+import { ATTRIBUTE, C1_PROPERTY, IDENTIFIER_PROPERTY } from "../const.js"
+import { _qsaClosest } from "./querySelector.js"
 
 /** @param { Element } host */
 export const _refs = (host) => {
-  const qsa = _qsa(host)
+  const identifier = host[C1_PROPERTY][IDENTIFIER_PROPERTY]
+  const qsaClosest = _qsaClosest(host)
 
   /** @param { string } name */
-  return (name, root = host) =>
-    qsa(
-      `[${ATTRIBUTE}-ref~="${host[C1_PROPERTY][IDENTIFIER_PROPERTY]}.${name}"]`.toLowerCase(),
-      root
-    ).filter(
-      (ref) =>
-        ref.parentElement.closest(host[C1_PROPERTY][SELECTOR_PROPERTY]) === host
-    )
+  return (name) => qsaClosest(`[${ATTRIBUTE}-ref~="${identifier}.${name}"]`)
 }
 
 /** @param { Element } host */

@@ -1,8 +1,9 @@
 import { C1_PROPERTY } from "./const.js"
 
 /**
+ * @template API public api
  * @param { Element } element
- * @returns { Promise<unknown> }
+ * @returns { Promise<API> }
  */
 export const whenConnected = (element) => {
   const defineProperty = (descriptor) =>
