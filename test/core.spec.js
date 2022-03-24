@@ -57,6 +57,14 @@ module(
         })
         assert.verifySteps(["1", "2"])
       })
+
+      test("don't connect node with `c1-ignore` attribute", async (assert) => {
+        element.setAttribute("c1-ignore", "")
+        await connect(element, () => {
+          assert.step("1")
+        })
+        assert.verifySteps([])
+      })
     })
   }
 )
