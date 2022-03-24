@@ -27,7 +27,7 @@ module("refs", () => {
     const element = createElement("div", { c1: "ref-2" })
     const child1 = createElement("div", { "c1-ref": "ref-2.foo" })
     const child2 = createElement("div", { "c1-ref": "ref-2.foo" })
-    const nested = createElement("div", { c1: "ref-2" })
+    const nested = createElement("div", { c1: "ref-2", "c1-ref": "ref-2.foo" })
     const nestedChild = createElement("div", { "c1-ref": "ref-2.foo" })
     nested.appendChild(nestedChild)
     element.appendChild(child1)
@@ -41,7 +41,7 @@ module("refs", () => {
 
       switch (host) {
         case element:
-          assert.propEqual(fooRefs, [child1, child2])
+          assert.propEqual(fooRefs, [child1, child2, nested])
           break
 
         case nested:

@@ -16,7 +16,8 @@ export const _refs = (host) => {
       `[${ATTRIBUTE}-ref~="${host[C1_PROPERTY][IDENTIFIER_PROPERTY]}.${name}"]`.toLowerCase(),
       root
     ).filter(
-      (ref) => ref.closest(host[C1_PROPERTY][SELECTOR_PROPERTY]) === host
+      (ref) =>
+        ref.parentElement.closest(host[C1_PROPERTY][SELECTOR_PROPERTY]) === host
     )
 }
 
